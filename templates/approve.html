@@ -1,0 +1,30 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+
+		<a href="/accounts/login">Login</a>
+		<a href="/accounts/register">Register</a> <br>
+		
+		<div style="margin: 2cm;"> 
+		{% for apl in leave_obj %}
+		{{forloop.counter}} <br>	
+		Leave End date :{{apl.start_date}} <br>
+		Leave start date : {{apl.end_date}} <br>
+		Discription : {{apl.disc}} <br>
+		Leaves left : {{user.total_leaves_left}} <br>
+		<a href="/leave_application/approve_leave/{{apl.id}}">Approve</a> <br> <br> <br>
+		{% endfor %}
+		</div>
+</body>
+</html>

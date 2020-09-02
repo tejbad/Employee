@@ -1,0 +1,254 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Register</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+    input[type=number], input[type=text], input[type=password], input[type=email]{
+        width: 80%;
+        padding: 12px 20px;
+        margin: 8px 10px;
+        margin-left: 10%;
+        box-sizing: border-box;
+        border: 1.2px solid rgb(22, 22, 22);
+        border-radius: 4px;
+    }
+	.form-box {
+		background-color: #e5e5eb;
+		width: 40%;
+        margin: 3% 30%;
+        border: 1.2px;
+        border-radius: 20px;
+	}
+	h1 {
+		text-align: center;
+		padding: 2rem;
+    }
+	.form-content label {
+        margin: 1rem 0 -1rem 1rem;
+        margin-left: 10%;
+
+	}
+	.form-content{
+		align-items: center;
+	}
+
+	.form-content .btn {
+        margin: 1rem 0 3rem 42%;
+    }
+	.forgot-pass {
+		margin: 1rem 0 0 25%;
+		padding-bottom: 3rem;
+    }
+	.navigate-to-next span, input[type=checkbox] {
+    margin-left: 1rem;
+    margin-left: 10%;
+
+    }
+	.navigate-to-next a {
+		color: rgb(17, 32, 32);
+		font-size: 16px;
+		font-weight: 600;
+		text-decoration: none;
+	}
+	.navigate-to-next a:hover {
+		text-decoration: none;
+		color: darkslategrey;
+    }
+    .col1 {
+        margin-left: 6% !important;
+    }
+    .col2{
+        margin-left: 4% !important;
+    }
+    @media only screen and (max-width: 1000px) {
+	.form-box {
+		width: 60%;
+        margin: 3% 20%;
+	}
+    }
+    @media only screen and (max-width: 767px) {
+	.form-box {
+		width: 80%;
+        margin: 3% 10%;
+    }
+    .col1 {
+        margin-left: 0 !important;
+    }
+    .col2{
+        margin-left: 0 !important;
+    }
+    }
+    @media only screen and (max-width: 400px) {
+	.form-content .btn {
+        margin: 1rem 0 3rem 35%;
+    }
+    }
+</style>
+
+<body>
+    {% if user.is_authenticated %}
+    <a href="/accounts/logout">Logout</a>
+    {% else %}
+    <a href="/accounts/login">Login</a>
+    <a href="/accounts/register">Register</a>
+    {% endif %}
+    <div class="form-box">
+    <div class="container">
+        <h1>Register</h1>
+        <div class="navigate-to-next" >
+            <Span>Already a member?</Span>
+            <a href="login">Login</a>
+        </div>
+    </div>
+
+<div class="container form-content">
+    <form action="register" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+                <div class="col-md-5 col1">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" placeholder="First name" name="first_name">
+                </div>
+                <div class="col-md-5 col2">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" placeholder="Last name" name="last_name">
+                </div>
+            </div>
+            <div>
+                <label>Email address</label>
+                <input type="email" class="form-control" placeholder="Email Id" name="email">
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="password" class="form-control" placeholder="Password" name="password1">
+            </div>
+            <div>
+                <label>Confirm Password</label>
+                <input type="password" class="form-control" placeholder="Confirm Password" name="password2">
+            </div>
+            <div>
+                <input type="checkbox"> I accept all the terms and conditions.
+            </div>
+
+            <div>
+                <label for="books-list">Employee type:</label>
+                <select name="emp_type" required>
+                    <option value="Manager" selected="selected">Manager</option>
+                    <option value="Employee" selected="selected">Employee</option>
+                </select><br>
+            </div>
+
+            <div>
+                <input class="btn btn-primary" type="submit" value="Submit">
+            </div>
+            {% for message in messages %}
+            <h4>{{ message }}</h4>
+            {% endfor %}
+        </form>
+    </div>
+</div>
+
+    <!-- remove this starts here -->
+    <!-- <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+                <div style="float: right;">
+                    <Small>Already a member?</Small>
+                    <a href="login" class="txt3">Login ></a>
+                </div>
+                <form class="login100-form validate-form" action="register" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <span class="login100-form-title">
+                        Register
+                    </span>
+
+                    <span class="txt1">
+                        First Name
+                    </span>
+                    <div class="wrap-input100 validate-input" data-validate="First Name is required" >
+                        <input class="input100" type="text" name="first_name" required>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <span class="txt1">
+                        Last Name
+                    </span>
+                    <div class="wrap-input100 validate-input" data-validate="Last Name is required">
+                        <input class="input100" type="text" name="last_name" required>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <span class="txt1">
+                        Mobile Number
+                    </span>
+                    <div class="wrap-input100 validate-input" data-validate="Mobile Number is required">
+                        <input class="input100" type="number" name="mob_no" required>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <span class="txt1">
+                        Password
+                    </span>
+                    <div class="wrap-input100 validate-input" data-validate="Password is required">
+                        <span class="btn-show-pass">
+                            <i class="fa fa-eye"></i>
+                        </span>
+                        <input class="input100" type="password" name="password1" required>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <span class="txt1">
+                        Confirm Password
+                    </span>
+                    <div class="wrap-input100 validate-input" data-validate="Password is required">
+                        <input class="input100" type="password" name="password2" required>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <span class="txt1">
+                        Email
+                    </span>
+                    <div class="wrap-input100 validate-input" data-validate="Email is required">
+                        <input class="input100" type="email" name="email" required>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="w-full">
+                        <div class="contact100-form-checkbox">
+                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me" required>
+                            <label class="label-checkbox100" for="ckb1">
+                                I acccept all Terms & Conditions
+                            </label>
+                        </div>
+                    </div>
+                    {% for message in messages %}
+                    <h4>{{ message }}</h4>
+                    {% endfor %}
+
+                    <div class="container-login100-form-btn" style="margin-left:30% ;">
+                        <button class="login100-form-btn">
+                            Register
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> -->
+<!-- remove this ends here -->
+
+
+</body>
+
+</html>
